@@ -1,0 +1,65 @@
+{% extends 'workingholiday/head.html' %}
+{% load staticfiles %}
+{% block content %}
+    <!-- Header -->
+    <section>
+        <div class="container">
+        <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <div class="team-member intro-text ">
+                        <img src="{{ get_id.userPicture }}" class="img-responsive img-circle " style="width:200px;height:200px;" alt="">
+                        <h3 class="section-subheading" style="margin-bottom: 30px">{{ get_id.name }}</h3>
+    
+                    </div>
+                </div>       
+                <div class="col-lg-8 col-md-8 col-sm-8">
+                    <div class="intro-text ">
+                        <h2 class="section-heading" style="padding-bottom: 25px;">嗨 ! WENXUAN LEE，完整的資料讓店家更想要你 !</h2>
+                        <form  class="form" action="#" method="POST" role="form" >
+                           {% csrf_token %}
+                            <div class="form-group floating-label-form-group">
+                                <label>電子郵件</label>
+
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Email" tabindex="2" required data-validation-required-message="Please enter your email address.">
+
+                                <p style="color:#8E8E8E;font-size:16px;line-height:50px;">您與另一位用戶確認預訂後才會顯示此資料</p>
+                            </div>
+                      
+                     
+                           <div class="form-group floating-label-form-group">
+                                <label>電話</label>
+                                <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" tabindex="3" required data-validation-required-message="Please enter your phone number.">
+                                <p style="color:#8E8E8E;font-size:16px;line-height:50px">您與另一位用戶確認預訂後才會顯示此資料</p>
+                            </div>
+                      
+                    
+                            <div class="form-group floating-label-form-group">
+                                <label>簡單介紹</label>
+                                <textarea rows="7" class="form-control" id="brief_intro" name="brief_intro" placeholder="Intro" tabindex="4" required data-validation-required-message="Please enter a message."></textarea>
+                                <p class="help-block text-danger" style="color:red;"></p>
+                                <p style="color:#8E8E8E;font-size:16px;line-height:28px">WorkingHoliday的起源，來自人與人之間的關係。自我介紹一下，讓別人更加認識您！<br><br>
+
+                                告訴大家您的專長以及喜好：您最引以為傲的專長是什麼？分享您的興趣、書籍、電影、音樂或舞蹈？
+
+                                <br><br>告訴大家您是怎樣的小幫手或主人：會如何協助店家？會如何接待小幫手？
+
+                                <br><br>向大家自我介紹：您對打工換宿的想法是什麼？</p>
+                            </div>
+                       
+                        <br>
+                        <div id="success"></div>
+                        <div class="row">
+                            <div class="form-group col-xs-12 text-right">
+                                <button type="submit" class="btn btn-primary btn-lg" value="UserStore">Send</button>
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+                </div>       
+        </div>
+    </section>
+{% endblock content %}
+
+
+
+

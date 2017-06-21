@@ -1,0 +1,130 @@
+{% extends 'workingholiday/head.html' %}
+{% load staticfiles %}
+{% block content %}
+
+    <!-- Portfolio Modal 1 -->
+     <section >
+        <div class="container">
+           
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+                    <ul class="nav nav-tabs nav-justified section-Mandarin" >
+                        <li role="presentation" class="active"><a role="tab" data-toggle="tab" href="#applying" style="font-weight: 700">申請中</a></li>
+                        <li role="presentation"><a role="tab" data-toggle="tab" href="#confirm">已核許</a></li>                
+                    </ul>
+                </div>
+        </div>    
+        <div class="container">    
+            <div class="tab-content " >
+                <div role="tabpanel" class="tab-pane active " id="applying">
+                    <div class="row">
+                        {% for get_apply in get_applys %}
+                        <div class="col-lg-2 col-md-2 col-sm-2 " >
+                            <div class="team-member ">
+                            <a href="https://workingholiday-v2-wenxuanlee.c9users.io/hostpage/{{get_apply.hostId}}/">
+                                <img src="{{ get_apply.hostPicture }}" class="img-responsive img-circle " style="width:180px;height:180px;margin-bottom: 0px;" alt="">
+                                <h3 class="section-hr" style="color:black;opacity:0.7">{{ get_apply.applyHostName }}</h3>
+                            </a>
+                            </div>
+                        </div>
+                    
+                        <div class="col-lg-5 col-md-5 col-sm-5 " style="padding-top: 5%">
+                            <p style="color:black;font-size:18px;line-height:32px">{{ get_apply.applyHostIntro }}</p>
+
+
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 " style="padding-top: 5%">
+                            <label style="font-size:18px;line-height:30px">應徵月份&nbsp; :&nbsp; </label>
+                                <button type="button" class="btn btn-default btn-md ">
+                                    <span class="glyphicon " aria-hidden="true" style="font-size:18px;">{{get_apply.applyMonth}}月</span>
+                                </button> 
+                         
+                        </div>
+                        
+                        <form action="" method="post" style="padding-top: 5%">
+                           {% csrf_token %}
+                            <div class="form-group col-lg-1 col-md-1 col-sm-1 " >
+                                <button  class="btn btn-success btn-lg disabled"  style="color:white;font-weight:500" > 
+                                申請中
+                                </button>
+                              
+                            </div>
+                            <div class="form-group col-lg-1 col-md-1 col-sm-1 " >
+                                <button  class="btn btn-danger btn-lg" name="cancel" id="{{ get_apply.hostId }}" value="{{ get_apply.hostId }}"  > 
+                                &nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+                            </div>
+                        </form>
+                        <hr>     
+                        {% endfor %}
+                    </div>
+                    
+                </div>
+                <div role="tabpanel" class="tab-pane " id="confirm">
+                    <div class="row">
+                        {% for get_confirm in get_confirms %}
+                        <div class="col-lg-2 col-md-2 col-sm-2 " >
+                            <div class="team-member ">
+                            <a href="https://workingholiday-v2-wenxuanlee.c9users.io/hostpage/{{get_apply.hostId}}">
+                                <img src="{{ get_confirm.hostPicture }}" class="img-responsive img-circle " style="width:180px;height:180px;margin-bottom: 0px;" alt="">
+                                <h3 class="section-hr" style="color:black;opacity:0.7">{{get_confirm.confirmHostName}}</h3>
+                            </a>
+                            </div>
+                        </div>
+                    
+                        <div class="col-lg-5 col-md-5 col-sm-5 " style="padding-top: 5%">
+                            <p style="color:black;font-size:18px;line-height:32px">{{get_confirm.confirmHostIntro}}</p><br><br>
+                            <span class="glyphicon glyphicon glyphicon-envelope" aria-hidden="true" style="color:#8E8E8E;font-size:18px;"> Email : {{get_confirm.confirmHostEmail}}</span>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 " style="padding-top: 5%">
+                            <label style="font-size:18px;line-height:30px">應徵月份&nbsp; :&nbsp; </label>
+                                <button type="button" class="btn btn-default btn-md ">
+                                    <span class="glyphicon " aria-hidden="true" style="font-size:18px;">{{get_confirm.confirmMonth}}月</span>
+                                </button>  
+                         
+                        </div>
+                        
+             
+                   
+                            <div class="form-group col-lg-2 col-md-2 col-sm-2 " style="padding-top: 5%">
+                                <button  class="btn btn-success btn-lg " data-toggle="modal" data-target="#test{{ get_confirm.hostId }}"  style="color:white;font-weight:500" > 
+                                完成體驗
+                                </button>
+                              
+                            </div>
+ 
+              
+                        
+                       <hr>     
+                      {% endfor %}
+                    </div>
+                    
+                </div>
+            </div>
+        </div>     
+    </section>
+    {% for get_confirm in get_confirms %}
+    <div class="modal fade" id="test{{ get_confirm.hostId }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4><span class="fa fa-heart fa-2x " aria-hidden="true" id="myModalLabel"></span> &nbsp;&nbsp;評價</h4>
+                        
+                      </div>
+                      <form  class="form" action="#" method="POST" role="form">
+                     {% csrf_token %}
+                     
+                      <div class="modal-body">
+                          <textarea rows="5" class="form-control" id="comment" name="comment" placeholder="Host的招待如何?"  required data-validation-required-message="Please enter a message."></textarea>
+                         
+                
+                      </div>
+                   
+                      <div class="modal-footer">
+                        <button  type= "submit " name="finish" id="{{ get_confirm.hostId }}" value="{{ get_confirm.hostId }}" class="btn btn-primary">Send</button>
+                      </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+        {% endfor %}
+{% endblock content %}

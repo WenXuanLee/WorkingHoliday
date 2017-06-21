@@ -1,0 +1,77 @@
+{% extends 'workingholiday/head.html' %}
+{% load staticfiles %}
+{% block content %}
+    <section>
+        <div class="container" style="padding-left: 5%;" >
+            <div class="row">
+
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <div class="team-member intro-text ">
+                        <img src="{{ get_user.userPicture }}" class="img-responsive  " style="width:300px;height:300px;  border: 1px solid rgba(0,0,0,0.1);
+                            border-radius: 10px;" alt="">
+                        <h3 class="section-subheading" style="margin-bottom: 30px"></h3>    
+                    </div>
+                </div>       
+
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="intro-text ">
+                        <h2 class="section-heading" style="padding-bottom: 5px;letter-spacing: 1px;text-transform: none">您好，我是{{ get_user.name }} !</h2>
+                    </div>
+                    <a href="#comment" class="page-scroll" style="cursor: pointer;text-decoration:none"><h5 style="color:#7d7d7d;letter-spacing:1px;">已成功{{ count }}次體驗&nbsp;·&nbsp;<i class="fa fa-star fa-1x" style="color:#56A690" aria-hidden="true"></i><i class="fa fa-star fa-1x" style="color:#56A690" aria-hidden="true"></i><i class="fa fa-star fa-1x" style="color:#56A690" aria-hidden="true"></i><i class="fa fa-star fa-1x" style="color:#56A690" aria-hidden="true"></i><i class="fa fa-star fa-1x" style="color:#56A690" aria-hidden="true"></i><i class="fa fa-star fa-1x" style="color:#56A690" aria-hidden="true"></i>&nbsp;·&nbsp;{{ count }}則評價
+                    </h5></a>
+
+                    <br><br>
+                    <div class="" style="">
+                        <p style="color:black;font-size:18px;line-height:32px">{{get_intro.brief_intro }}</p>
+                    </div><br>
+                    <h5 style="color:#7d7d7d;letter-spacing:1px;"><i class="fa fa-trophy fa-3x " style="color:#FFD306" aria-hidden="true"></i>&nbsp;優質小幫手
+                    </h5>
+                    <p style="color:black;font-size:14px;opacity: 0.9"></p>
+     
+                    
+                </div>    
+            </div> 
+        </div>  
+        <div class="container" style="padding-left: 5%;" id="comment">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3" style="margin-top:-2%;">
+                    <div class="panel panel-default" style="height:auto;">
+                        <div class="panel-heading">已驗證資訊</div>
+                        <div class="panel-body">電子郵件地址<i class="fa fa-check-circle-o " style="margin-top:-3px;float:right;font-size:22px;color:#56A690" aria-hidden="true"></i></div>
+                        <div class="panel-body">電話號碼<i class="fa fa-check-circle-o " style="margin-top:-3px;float:right;font-size:22px;color:#56A690" aria-hidden="true"></i></div>
+                        
+                    </div>
+                </div>       
+                <div class="col-lg-9 col-md-9 col-sm-9 " style="margin-top:-2%;" >
+                    <div class="intro-text ">
+                        <h2 class="section-heading" style="padding-bottom: 25px;letter-spacing: 2px;opacity: 0.9">評價</h2>
+                   
+                    </div>
+                </div> 
+                {% for get_comment in get_comments %}
+                <div class="col-lg-9 col-md-9 col-sm-9   usercomment" >
+                        <div class="col-lg-2 col-md-2 col-sm-2 " >
+                            <div class="team-member ">
+                            <a href="https://workingholiday-v2-wenxuanlee.c9users.io/userpage/{{get_comment.commentId}}" style="text-decoration:none">
+                                <img src="{{ get_comment.commentPicture }}" class="img-responsive img-circle " style="width:80px;height:80px;margin-bottom: 0px;" alt="">
+                                <p style="color:#8E8E8E;font-size:14px;">{{get_comment.commentName}}</p>
+                            </a>
+                            </div>
+                        </div>
+                    
+                        <div class="col-lg-7 col-md-7 col-sm-7 " >
+                            <p style="color:black;font-size:14px;letter-spacing: 2px;line-height:24px;padding-bottom: 14px;font-weight:600;opacity: 0.8" >{{ get_comment.comment}}</p>
+                            <a style="color:black; text-decoration:none" href="https://workingholiday-v2-wenxuanlee.c9users.io/hostpage/{{get_comment.commentId}}"><h5 style="color:#7d7d7d;letter-spacing:1px;opacity: 0.9;font-size:12px;">來自{{ get_comment.commentHostName }}&nbsp;·&nbsp;{{get_comment.commentarea}}&nbsp;·&nbsp;2016年7月
+                            </h5></a>
+                            <hr>
+
+                        </div>
+                </div> 
+                {% endfor %}
+  
+            </div> 
+        </div>
+        
+ 
+    </section>
+{% endblock content %}

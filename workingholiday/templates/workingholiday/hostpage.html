@@ -1,0 +1,230 @@
+{% extends 'workingholiday/head.html' %}
+{% load staticfiles %}
+{% block content %}
+    <div id="myCarousel" class="carousel slide " style="">
+    <!-- Navigation -->
+    
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+        
+            <div class="item active">
+                <div class="fill" >
+                    <a class="page-scroll" href="#portfolio">
+                        <img src="{{ get_host.hostimage1.url }}" class="img-responsive fill carsouelPhoto" alt="">
+                    </a>
+                </div>
+  
+            </div>
+            <div class="item animated fadeIn">
+            
+                    <img src="{{ get_host.hostimage2.url }}" class="img-responsive fill" alt="" style="">
+                
+                <div class="carousel-caption">
+                   
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill">
+                <a class="page-scroll" href="#portfolio">
+                    <img src="{{ get_host.hostimage3.url }}" class="img-responsive fill" alt="" style=""></div>
+                </a>
+         
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="icon-prev"></span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="icon-next"></span>
+        </a>
+    </div>
+    <section style="padding-top:30px">
+        <div class="container">
+            <div class=" col-lg-8 col-md-8 col-sm-8 ">
+               
+                <div class="col-lg-9 col-md-9 col-sm-9 ">
+                    <div class="intro-text ">
+                        <h2 class="section-heading" style="padding-bottom: 15px;letter-spacing: 1px;font-weight: 700">歡迎來到，{{ get_host.hostname }} !
+                        </h2><br>
+                        
+                        <p style="color:black;font-size:18px;letter-spacing: 2px;line-height:24px;padding-bottom: 14px;font-weight:600;opacity: 0.8" >{{ get_host.hostintro }}</p><br>
+                        <a href="#comment" class="page-scroll" style="cursor: pointer;text-decoration:none">
+                        <h5 style="color:#7d7d7d;letter-spacing:1px;font-size:14px">{{ get_host.hostarea }}&nbsp;·&nbsp;{{ get_host.hostaddress }}&nbsp;·&nbsp;<i class="fa fa-star fa-1x" style="color:#56A690" aria-hidden="true"></i><i class="fa fa-star fa-1x" style="color:#56A690" aria-hidden="true"></i><i class="fa fa-star fa-1x" style="color:#56A690" aria-hidden="true"></i><i class="fa fa-star fa-1x" style="color:#56A690" aria-hidden="true"></i><i class="fa fa-star fa-1x" style="color:#56A690" aria-hidden="true"></i><i class="fa fa-star fa-1x" style="color:#56A690" aria-hidden="true"></i>&nbsp;·&nbsp;{{ count }}則評價
+                        </h5>
+                        </a>
+                    </div>
+                <br>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 " >
+                    <div class="team-member ">
+                        <a href="https://workingholiday-v2-wenxuanlee.c9users.io/userpage/{{ get_id.userId }}/">
+                            <img src="{{ get_id.userPicture }}" class="img-responsive img-circle " style="width:100px;height:100px;margin-bottom: 0px;" alt="">
+                            <p style="color:#8E8E8E;font-size:14px;">{{ get_id.name }}</p>
+                        </a>
+                    </div>
+                
+                </div>
+                
+                <hr>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4" id="applyform" style="">
+                
+                    <div class="panel panel-default" style="height:auto;">
+                        <div class="panel-heading " style="text-align:center;">{{ get_host.hostname }}</div>
+                        <form class="form" action="#" method="POST" role="form">
+                        {% csrf_token %}
+                        <div class="panel-body">
+       
+                            <div class="form-group ">
+                                <label for="id_field"  name="userId">應徵月份 : </label>
+                                <select class="form-control" style="width:23%;display: inline;" id="applyMonth" name="field" id="id_field" placeholder="applyMonth" >
+                                    <option value="1">1月</option>
+                                    <option value="2">2月</option>
+                                    <option value="3">3月</option>
+                                    <option value="4">4月</option>
+                                    <option value="5">5月</option>
+                                    <option value="6">6月</option>
+                                    <option value="7">7月</option>
+                                    <option value="8">8月</option>
+                                    <option value="9">9月</option>
+                                    <option value="10">10月</option>
+                                    <option value="11">11月</option>
+                                    <option value="12">12月</option>
+                                </select>
+                                &nbsp;&nbsp;
+
+                                <label >(換宿時間為一個月計)</label>
+                                <br><br>
+                                <button type="submit" class="btn btn-pink btn-lg " style="width:100%"><i class="fa fa-heart fa-1x" aria-hidden="true" ></i>&nbsp;&nbsp;心願清單</button>   
+                                <br><br>
+                                <button type="submit" class="btn btn-primary btn-lg " style="width:100%"><i class="fa fa-flash fa-1x" aria-hidden="true" ></i>&nbsp;&nbsp;立刻應徵</button>
+                            </div>
+                        </div>
+               
+                        
+                    </form> 
+                    </div>
+                
+            </div>
+            <div class=" col-lg-8 col-md-8 col-sm-8 " style="padding-bottom: 3%;" id = "needform">  
+                <p style="color:black;font-size:26px;letter-spacing: 2px;line-height:24px;font-weight:700;opacity: 0.8"" >
+                    <i class="fa fa-hand-o-right fa-1x" aria-hidden="true" style="color:#56A690;font-size:34px""></i>小幫手需求</p>
+            </div>
+            <div class=" col-lg-8 col-md-8 col-sm-8 ">  
+                <p style="color:black;font-size:18px;letter-spacing: 2px;line-height:32px;padding-bottom: 14px;font-weight:600;opacity: 0.8" >
+                        {{ get_host.hostneed }}
+                </p>
+                <hr>
+            </div>
+            <div class=" col-lg-8 col-md-8 col-sm-8 " style="padding-bottom: 3%;">  
+                <p style="color:black;font-size:26px;letter-spacing: 2px;line-height:24px;font-weight:700;opacity: 0.8" >
+                    <i class="fa fa-hand-o-right fa-1x" aria-hidden="true" style="color:#56A690;font-size:34px"></i>小幫手福利</p>
+            </div>
+            <div class=" col-lg-8 col-md-8 col-sm-8 ">  
+                <p style="color:black;font-size:18px;letter-spacing: 2px;line-height:32px;padding-bottom: 14px;font-weight:600;opacity: 0.8" >
+                     {{ get_host.hostbrief }}</p>
+                <hr>
+            </div>
+            <div class=" col-lg-8 col-md-8 col-sm-8 " style="padding-bottom: 3%;">  
+                <p style="color:black;font-size:26px;letter-spacing: 2px;line-height:24px;font-weight:700;opacity: 0.8" >
+                    <i class="fa fa-hand-o-right fa-1x" aria-hidden="true" style="color:#56A690;font-size:34px"></i>換宿環境</p>
+            </div>
+            <div class=" col-lg-8 col-md-8 col-sm-8 " id="portfolio">   
+            <!-- Picture Item -->            
+                <div class="col-lg-6 col-md-6 col-sm-6 portfolio-item " >
+                    <a href="#hostimage1" class="portfolio-link lightbox animated fadeIn" >
+   
+                        <img src="{{ get_host.hostimage1.url }}" class="img-responsive" alt="" >
+                    </a>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 portfolio-item " >
+                    <a href="#hostimage2" class="portfolio-link lightbox animated fadeIn" >
+                    
+                        <img src="{{ get_host.hostimage2.url }}" class="img-responsive" alt="">
+                    </a>
+                </div>
+
+
+                <div class="col-lg-6 col-md-6 col-sm-6 portfolio-item " >
+                    <a href="#hostimage3" class="portfolio-link lightbox animated fadeIn" >
+
+                        <img src="{{ get_host.hostimage3.url }}" class="img-responsive" alt="">
+                    </a>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 portfolio-item " >
+                    <a href="#hostimage4" class="portfolio-link lightbox animated fadeIn" >
+
+                        <img src="{{ get_host.hostimage4.url }}" class="img-responsive" alt="">
+                    </a>
+                </div>
+                <hr>
+            </div>  
+            <div class=" col-lg-8 col-md-8 col-sm-8 " id="comment" style="padding-bottom: 3%;">   
+                <p style="color:black;font-size:26px;letter-spacing: 2px;line-height:24px;font-weight:700;opacity: 0.8"" >
+                    評價&nbsp;·&nbsp;<i class="fa fa-star fa-1x" aria-hidden="true" style="color:#56A690;font-size:34px""></i><i class="fa fa-star fa-1x" aria-hidden="true" style="color:#56A690;font-size:34px""></i><i class="fa fa-star fa-1x" aria-hidden="true" style="color:#56A690;font-size:34px""></i><i class="fa fa-star fa-1x" aria-hidden="true" style="color:#56A690;font-size:34px""></i><i class="fa fa-star fa-1x" aria-hidden="true" style="color:#56A690;font-size:34px""></i></p>
+            </div>  
+            {% for get_comment in get_comments %}
+            <div class="col-lg-8 col-md-8 col-sm-8   " >
+                <div class="col-lg-2 col-md-2 col-sm-2 " >
+                    <div class="team-member ">
+                    <a href="https://workingholiday-v2-wenxuanlee.c9users.io/userpage/{{get_comment.commentId}}">
+                        <img src="{{ get_comment.commentPicture }}" class="img-responsive img-circle " style="width:80px;height:80px;margin-bottom: 0px;" alt="">
+                        <p style="color:#8E8E8E;font-size:14px;"> {{ get_comment.commentName }}</p>
+                    </a>
+                    </div>
+                </div>
+            
+                <div class="col-lg-10 col-md-10 col-sm-10 " style="padding-top: 2%;">
+                    <p style="color:black;font-size:14px;letter-spacing: 2px;line-height:24px;padding-bottom: 14px;font-weight:600;opacity: 0.8" >{{ get_comment.comment }}</p>
+
+                    <h5 style="color:#7d7d7d;letter-spacing:1px;font-size:14px">2016年&nbsp;·&nbsp;7月&nbsp;·&nbsp;<i class="fa fa-star fa-1x" style="color:#56A690" aria-hidden="true"></i><i class="fa fa-star fa-1x" style="color:#56A690" aria-hidden="true"></i><i class="fa fa-star fa-1x" style="color:#56A690" aria-hidden="true"></i><i class="fa fa-star fa-1x" style="color:#56A690" aria-hidden="true"></i><i class="fa fa-star fa-1x" style="color:#56A690" aria-hidden="true"></i><i class="fa fa-star fa-1x" style="color:#56A690" aria-hidden="true"></i>
+                    </h5>
+                    <button type="button" class="btn btn-default btn-md" style="float:right;color:black;font-size:16px;letter-spacing: 2px;opacity: 0.8">
+
+                        <i class="fa fa-thumbs-up " style="color:#56A690;font-size:20px" aria-hidden="true"></i>&nbsp;有用
+                    </button>
+                    <button type="button" class="btn btn-default btn-md" style="float:right;margin-right:3%;color:black;font-size:16px;letter-spacing: 2px;opacity: 0.8">
+
+                        <i class="fa fa-flag " style="color:#ff4c4c;font-size:20px" aria-hidden="true"></i>&nbsp;檢舉
+                    </button>                   
+                    <hr>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+ 
+
+                    
+    <div id="hostimage1" class="mfp-hide popup-box animated-fast fadeIn ">
+        <img src="{{ get_host.hostimage1.url }}" alt=""><!-- Image 1 source -->
+
+    </div>
+    <div id="hostimage2" class="mfp-hide popup-box animated-fast fadeIn ">
+        <img src="{{ get_host.hostimage2.url }}" alt=""><!-- Image 1 source -->
+
+    </div>
+    <div id="hostimage3" class="mfp-hide popup-box animated-fast fadeIn ">
+        <img src="{{ get_host.hostimage3.url }}" alt=""><!-- Image 1 source -->
+
+    </div>
+        <div id="hostimage4" class="mfp-hide popup-box animated-fast fadeIn ">
+        <img src="{{ get_host.hostimage4.url }}" alt=""><!-- Image 1 source -->
+
+    </div>
+    <!-- Header -->
+
+
+
+
+{% endblock content %}

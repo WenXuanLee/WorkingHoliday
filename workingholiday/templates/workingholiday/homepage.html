@@ -1,0 +1,233 @@
+{% extends 'workingholiday/head.html' %}
+{% load staticfiles %}
+{% block navbar-black %}
+    <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top" >
+    
+        <div class="container ">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll" >
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">WorkingHolidays</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll " href="#about" id ="services">Services</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll"   onclick="fb_login();" style="cursor:pointer" id="login1">Login</a>
+                         <div id="status" class"hidden" ></div>
+
+                    </li>
+                    <li class="dropdown hidden" id = "host">
+                    <a class="" data-toggle="dropdown" href="#">
+                        
+                        換宿管理
+                    </a>
+                    <ul class="dropdown-menu bg-dark " >
+                        <li><a href="" id="hostpage1" style="color:#56A690;">換宿管理</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="" id="hostedit1" style="color:#56A690;">發佈換宿</a>
+                        </li>
+					
+                 
+                        <li class="divider"></li>
+                        <li><a href="" id="hostmanage1" style="color:#56A690;">小幫手管理</a>
+                        </li>
+                       
+                    </ul>
+                    <!-- /.dropdown-user -->
+					</li>
+					<li><img class="responsive img-circle hidden"  style="width:40px;height:40px;display:inline" id = "profilephoto"></img></li>
+                    <li class="dropdown hidden" id = "user">
+                    
+                    <a class="" data-toggle="dropdown" href="#" id="profileName"></a>
+                    
+                    <ul class="dropdown-menu bg-dark">
+                        <li><a href="" id="userpage1" style="color:#56A690;" >個人檔案</a>
+                        </li>
+						<li class="divider"></li>
+                        <li><a href="" id="useredit1" style="color:#56A690;">編輯個人檔案</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="" id="usermanage1" style="color:#56A690;">查看申請</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="login.html" style="color:#56A690;"> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+				  </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+{% endblock navbar-black %}
+
+{% block content %}
+    <!-- Header -->
+     <header style="background-image: url('{% static 'css/images/IMG_20160610_003426.jpg' %}');">
+        <div class="container animated-delay fadeIn">
+            <div class="intro-text ">
+                <div class="intro-lead-in ">用力工作，用力玩樂 !</div>
+                <div class="intro-heading">打工換宿瘋台灣 </div>
+               <h1><a class="page-scroll " href="#portfolio"><i class="fa fa-arrow-circle-o-down" aria-hidden="true" style="color:white"></i></a></h1>  
+
+            <div class=" secondlayer animated-long-delay fadeIn" id="#secondlayer">
+                <form  method="get">
+                    <div class="form-group col-lg-4 col-md-4 col-sm-4">
+                    <select id="soflow" class="" name="searcharea" id="id_field" placehoder="">
+                        
+                    <option class="text-muted" disabled selected>請選擇區域</option>
+                        <optgroup label="北部"> 
+                            <option value="台北">台北</option>
+                            <option value="基隆">基隆</option>
+                            <option value="桃園">桃園</option>
+                            <option value="新竹">新竹</option>
+                        </optgroup>
+                        <optgroup label="中部">
+                            <option value="苗栗">苗栗</option>
+                            <option value="台中">台中</option>
+                            <option value="南投">南投</option>
+                            <option value="彰化">彰化</option>
+                            <option value="雲林">雲林</option>
+                        </optgroup>
+                        <optgroup label="南部">
+                            <option value="嘉義">嘉義</option>
+                            <option value="台南">台南</option>
+                            <option value="高雄">高雄</option> 
+                            <option value="屏東">屏東</option>
+                        </optgroup>
+                        <optgroup label="東部">
+                            <option value="台東">台東</option>
+                            <option value="花蓮">花蓮</option>
+                            <option value="宜蘭">宜蘭</option>
+                        </optgroup>
+                        <optgroup label="離島區域">
+                            <option value="小琉球">小琉球</option>
+                            <option value="綠島">綠島</option>
+                            <option value="蘭嶼">蘭嶼</option>
+                            <option value="澎湖">澎湖</option>
+                            <option value="金門">金門</option>
+                            <option value="馬祖">馬祖</option>
+                        </optgroup>
+                    </select>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <div class="form-group">
+                          <label class="sr-only" for="checkin">Check in</label>
+                          <div class="input-group">
+                            <input type="text" class="form-control" id="checkin" placeholder="Check in">
+                            <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <div class="form-group">
+                          <label class="sr-only" for="checkout">Check out</label>
+                          <div class="input-group">
+                            <input type="text" class="form-control" id="checkout" placeholder="Check out">
+                            <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                          </div>
+                        </div>
+                    </div>                     
+                         
+                    <div class="col-lg-12 col-md-12 col-sm-12" style="padding-top: 10px">
+                        <button type="submit" class="btn btn-default btn-primary btn-lg" style="color:#FCFCFC" >搜尋</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        </div>
+ 
+
+    
+    </header>
+    
+    <!-- Services Section -->
+    <section id="portfolio" class="bg-light-gray ">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center wow aniated fadeInDown" >
+                 <h2 class="section-heading">馬上體驗</h2>
+                    <h3 class="section-subheading text-muted " style="margin-bottom: 20px">熱門店家搶先看 !</h3>            
+                    <ul style="margin-bottom: 3% ; margin-right:4%;"  >
+                        <li class="btn btn-primary  active" role="tab" data-toggle="tab" href="#all">全部</li>
+                        <li class="btn btn-primary " role="tab" data-toggle="tab" href="#hothot">熱門</li>
+                        <li class="btn btn-primary " role="tab" data-toggle="tab" href="#news">最新</li>
+                    </ul>  
+                </div>
+                <div class="row">
+                    <div class="tab-content">
+                    <div role="tabpanel" class="wow tab-pane active " id="all" style="margin-top : 3%">
+                        {% for get_host in get_hosts %}
+                        <div class="col-md-4 col-sm-6 portfolio-item wow animated-delay fadeInLeft" >
+                            <a href="https://workingholiday-v2-wenxuanlee.c9users.io/hostpage/{{get_host.hostId }}" class="portfolio-link animated " >
+                                <div class="portfolio-hover">
+                                        <div class="portfolio-hover-content">
+                                            <h3 class="section-subheading text-muted" style="margin-bottom: 20px;font-size:24px;color:white">
+                                            {{ get_host.hostname }}</h3> 
+                                            <h3 class="section-subheading text-muted" style="margin-bottom: 20px;font-size:32px;color:white">
+                                            {{ get_host.hostarea }}</h3> 
+                                        </div>
+                                </div>
+                                <img src="{{ get_host.hostimage1.url }}" class="img-responsive" alt="">
+                            </a>
+                        </div>
+                         {% endfor %}
+        
+                    </div>
+                   <div role="tabpanel" class="tab-pane animated fadeIn" id="hothot" style="margin-top : 3%">
+                       {% for get_host in get_hosts %}
+                        <div class="col-md-4 col-sm-6 portfolio-item  animated fadeIn" >
+                            <a href="https://workingholiday-v2-wenxuanlee.c9users.io/hostpage/{{get_host.hostId }}" class="portfolio-link animated " >
+                                <div class="portfolio-hover">
+                                        <div class="portfolio-hover-content">
+                                            <h3 class="section-subheading text-muted" style="margin-bottom: 20px;font-size:24px;color:white">
+                                            {{ get_host.hostname }}</h3> 
+                                            <h3 class="section-subheading text-muted" style="margin-bottom: 20px;font-size:32px;color:white">
+                                            {{ get_host.hostarea }}</h3> 
+                                        </div>
+                                </div>
+                                <img src="{{ get_host.hostimage2.url }}" class="img-responsive" alt="">
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>  
+                   <div role="tabpanel" class="tab-pane animated fadeIn" id="news" style="margin-top : 3%">
+                       {% for get_host in get_hosts %}
+                        <div class="col-md-4 col-sm-6 portfolio-item " >
+                            <a href="https://workingholiday-v2-wenxuanlee.c9users.io/hostpage/{{get_host.hostId }}" class="portfolio-link animated fadeIn" >
+                                <div class="portfolio-hover">
+                                        <div class="portfolio-hover-content">
+                                            <h3 class="section-subheading text-muted" style="margin-bottom: 20px;font-size:24px;color:white">
+                                            {{ get_host.hostname }}</h3> 
+                                            <h3 class="section-subheading text-muted" style="margin-bottom: 20px;font-size:32px;color:white">
+                                            {{ get_host.hostarea }}</h3> 
+                                        </div>
+                                </div>
+                                <img src="{{ get_host.hostimage3.url }}" class="img-responsive" alt="">
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>       
+          
+
+                    </div>
+                </div><!-- end Inner row -->
+                     
+            </div><!-- end row -->
+        </div><!-- end container -->
+
+    </section>
+ {% endblock content %}

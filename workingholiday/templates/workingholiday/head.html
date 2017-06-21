@@ -1,0 +1,458 @@
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>WorkingHoliday </title>
+
+    <!-- Bootstrap Core CSS -->
+    
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="shortcut icon" href="{% static 'css/images/favicon.ico' %}">
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+    
+    <!-- Theme CSS -->
+    <link href="{% static 'css/agency.css' %}" rel="stylesheet">
+    <link href="{% static 'css/animate.css' %}" rel="stylesheet">
+    <!--<link href="{% static 'css/preloader.min.css' %}" rel="stylesheet">-->
+        <!-- Magnific popup -->
+    <link href="{% static 'css/magnific-popup.min.css' %}" rel="stylesheet">
+        <!-- Icons Fonts -->
+    <script src="https://use.fontawesome.com/e07011ff1d.js"></script>
+        <!-- Main styles -->
+       <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+ 
+    
+</head>
+ 
+<body id="page-top" class="index">
+<script>
+function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response);
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
+    if (response.status === 'connected') {
+      // Logged into your app and Facebook.
+            FB.api('/me', function(response) {
+                user_Id = response.id;
+                user_name = response.name;
+                $('#fbId1').val(user_Id);
+                $('#id_field').val(user_Id);
+                $('#profileName').html(user_name);
+                $('#user').removeAttr('class','hidden');
+                $('#host').removeAttr('class','hidden');
+                $('#services').attr('class','hidden');
+                $('#login').attr('class','hidden');
+                $('#login1').attr('class','hidden');
+               
+            });
+             
+            FB.api('/me/picture?width=240&height=240', function(response) {
+                userpicture = response.data.url;
+                
+                $('#profilephoto').attr('src',userpicture);
+                $('#profilephoto').removeAttr('class','hidden');
+                $.get('/getuserid/',{
+                    userId: user_Id,
+                    userName: user_name,
+                    userPicture : userpicture,
+                }, function(data) {  ;}); 
+            });
+            $('#userpage').click(function() {
+                $('a').attr("href","/userpage/" + user_Id)
+            });
+            $('#userpage1').click(function() {
+                $('a').attr("href","/userpage/" + user_Id)
+            });
+            $('#useredit').click(function() {
+                $('a').attr("href","/useredit/" + user_Id)
+            });
+            $('#useredit1').click(function() {
+                $('a').attr("href","/useredit/" + user_Id)
+            });
+            $('#usermanage').click(function() {
+                $('a').attr("href","/usermanage/" + user_Id)
+            });
+            $('#usermanage1').click(function() {
+                $('a').attr("href","/usermanage/" + user_Id)
+            });
+            $('#hostpage').click(function() {
+                $('a').attr("href","/hostpage/" + user_Id)
+            });
+            $('#hostpage1').click(function() {
+                $('a').attr("href","/hostpage/" + user_Id)
+            });
+            $('#hostedit').click(function() {
+                $('a').attr("href","/hostedit/" + user_Id)
+            });
+            $('#post').click(function() {
+                $('a').attr("href","/hostedit/" + user_Id)
+            });
+            $('#hostedit1').click(function() {
+                $('a').attr("href","/hostedit/" + user_Id)
+            });
+                        $('#hostpage').click(function() {
+                $('a').attr("href","/hostpage/" + user_Id)
+            });
+            $('#hostmanage').click(function() {
+                $('a').attr("href","/hostmanage/" + user_Id)
+            });
+             $('#hostmanage1').click(function() {
+                $('a').attr("href","/hostmanage/" + user_Id)
+            });
+    } else if (response.status === 'not_authorized') {
+      // The person is logged into Facebook, but not your app.
+    
+    } else {
+      // The person is not logged into Facebook, so we're not sure if
+      // they are logged into this app or not.
+  
+    }
+  }
+
+  // This function is called when someone finishes with the Login
+  // Button.  See the onlogin handler attached to it in the sample
+  // code below.
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+     
+      statusChangeCallback(response);
+       
+    });
+  }
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '295431054144471',
+      xfbml      : true,
+      version    : 'v2.7'
+    });
+    FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+
+function fb_login(){
+    FB.login(function(response) {
+
+        if (response.authResponse) {
+            
+            //console.log(response); // dump complete info
+            FB.api('/me', function(response) {
+                user_Id = response.id;
+                user_name = response.name;
+                
+                $('#fbId').val(user_Id);
+                $('#id_field').val(user_Id);
+                $('#profileName').html(user_name);
+                $('#user').removeAttr('class','hidden');
+                $('#host').removeAttr('class','hidden');
+                $('#services').attr('class','hidden');
+                $('#login1').attr('class','hidden');
+                $('#login').attr('class','hidden');
+                
+            });
+             
+            FB.api('/me/picture?width=240&height=240', function(response) {
+                userpicture = response.data.url;
+                
+                $('#profilephoto').attr('src',userpicture);
+                $('#profilephoto').removeAttr('class','hidden');
+                $.get('/getuserid/',{
+                    userId: user_Id,
+                    userName: user_name,
+                    userPicture : userpicture,
+                }, function(data) {  ;});          
+            });
+            $('#userpage').click(function() {
+                $('a').attr("href","/userpage/" + user_Id)
+            });
+            $('#userpage1').click(function() {
+                $('a').attr("href","/userpage/" + user_Id)
+            });
+            $('#useredit').click(function() {
+                $('a').attr("href","/useredit/" + user_Id)
+            });
+            $('#useredit1').click(function() {
+                $('a').attr("href","/useredit/" + user_Id)
+            });
+            $('#usermanage').click(function() {
+                $('a').attr("href","/usermanage/" + user_Id)
+            });
+            $('#usermanage1').click(function() {
+                $('a').attr("href","/usermanage/" + user_Id)
+            });
+            $('#hostpage').click(function() {
+                $('a').attr("href","/hostpage/" + user_Id)
+            });
+            $('#hostpage1').click(function() {
+                $('a').attr("href","/hostpage/" + user_Id)
+            });
+            $('#hostedit').click(function() {
+                $('a').attr("href","/hostedit/" + user_Id)
+            });
+            $('#hostedit1').click(function() {
+                $('a').attr("href","/hostedit/" + user_Id)
+            });
+                        $('#hostpage').click(function() {
+                $('a').attr("href","/hostpage/" + user_Id)
+            });
+            $('#hostmanage').click(function() {
+                $('a').attr("href","/hostmanage/" + user_Id)
+            });
+             $('#hostmanage1').click(function() {
+                $('a').attr("href","/hostmanage/" + user_Id)
+            });
+        } 
+    }, {
+        scope: 'public_profile,email'
+    });
+   
+}
+
+</script>
+        <!--<div class="preloader">-->
+        <!--    <span class="loader">-->
+        <!--        <span class="loader-inner"></span>-->
+        <!--    </span>-->
+        <!--</div>-->
+    <!-- Navigation -->
+    {% block navbar-black %}
+    <nav id="mainNav" class="navbar navbar-default navbar-black navbar-fixed-top" >
+    
+        <div class="container ">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll" >
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="https://workingholiday-v2-wenxuanlee.c9users.io/">WorkingHolidays</a>
+                <form class="navbar-form navbar-left" method="get" role="search" id = "searchbar">
+				<div class="form-group" >
+				   
+                <select onchange="this.form.submit()" id="soflow" class=" form-group col-lg-4" name="searcharea" id="id_field" placehoder="店家區域" style="width:150%;">
+                    <option value="" disabled selected>請選擇區域</option>
+                       <optgroup label="北部"> 
+                            <option value="台北">台北</option>
+                            <option value="基隆">基隆</option>
+                            <option value="桃園">桃園</option>
+                            <option value="新竹">新竹</option>
+                        </optgroup>
+                        <optgroup label="中部">
+                            <option value="苗栗">苗栗</option>
+                            <option value="台中">台中</option>
+                            <option value="南投">南投</option>
+                            <option value="彰化">彰化</option>
+                            <option value="雲林">雲林</option>
+                        </optgroup>
+                        <optgroup label="南部">
+                            <option value="嘉義">嘉義</option>
+                            <option value="台南">台南</option>
+                            <option value="高雄">高雄</option> 
+                            <option value="屏東">屏東</option>
+                        </optgroup>
+                        <optgroup label="東部">
+                            <option value="台東">台東</option>
+                            <option value="花蓮">花蓮</option>
+                            <option value="宜蘭">宜蘭</option>
+                        </optgroup>
+                        <optgroup label="離島區域">
+                            <option value="小琉球">小琉球</option>
+                            <option value="綠島">綠島</option>
+                            <option value="蘭嶼">蘭嶼</option>
+                            <option value="澎湖">澎湖</option>
+                            <option value="金門">金門</option>
+                            <option value="馬祖">馬祖</option>
+                        </optgroup>
+                </select>
+          
+				</div>
+			</form>
+            </div>
+            
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
+             <ul class="nav navbar-nav navbar-right">
+               
+                    <li>
+                        <a class="page-scroll"   onclick="fb_login();" style="cursor:pointer" id="login">Login</a>
+                         <div id="status" class="hidden" ></div>
+
+                    </li>
+                    <li class="dropdown hidden" id = "host">
+                    <a class="" data-toggle="dropdown" href="#" id="manage">
+                        
+                        換宿管理
+                    </a>
+                    <ul class="dropdown-menu bg-dark " >
+                        <li><a href="https://workingholiday-wenxuanlee.c9users.io/hostpagelogin/{{test.userId}}" id="hostpage" style="color:#56A690;">換宿管理</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="https://workingholiday-v2-wenxuanlee.c9users.io/hostedit/self.user_Id" id="hostedit" style="color:#56A690;">發佈換宿</a>
+                        </li>
+						
+                        
+                        <li class="divider"></li>
+                        <li><a href="https://workingholiday-wenxuanlee.c9users.io/manage/{{test.userId}}" id="hostmanage" style="color:#56A690;">小幫手管理</a>
+                        </li>
+                       
+                    </ul>
+                    <!-- /.dropdown-user -->
+					</li>
+					<li><img class="responsive img-circle hidden"  src="" style="width:40px;height:40px;display:inline" id = "profilephoto"></img></li>
+                    <li class="dropdown hidden" id = "user">
+                    
+                    <a class="" data-toggle="dropdown" href="#" id="profileName"></a>
+                    
+                    <ul class="dropdown-menu bg-dark">
+                        <li><a <a href="https://workingholiday-wenxuanlee.c9users.io/userpage/{{test.userId}}" id="userpage" style="color:#56A690;" >個人檔案</a>
+                        </li>
+						<li class="divider"></li>
+                        <li><a href="https://workingholiday-wenxuanlee.c9users.io/useredit/{{test.userId}}" id="useredit" style="color:#56A690;">編輯個人檔案</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="https://workingholiday-wenxuanlee.c9users.io/usermanage/{{test.userId}}" id="usermanage" style="color:#56A690;">查看申請</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="login.html" style="color:#56A690;"> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+				  </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    {% endblock navbar-black %}
+    {% block content %}
+    {% endblock content %}
+
+    <!-- Header 
+    <section id="team" >
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Our Team</h2>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+ 
+                </div>
+                <div class="col-sm-4">
+                    <div class="team-member animated fadeInUp">
+                        <img src="{% static 'css/images/profilephoto.JPG' %}" class="img-responsive img-circle animated fadeInUp " style="margin-bottom: 30px;width:250px;height:250px;" alt="">
+                        <h4>WenXuan Lee</h4>
+                        <p class="text-muted">Main Developer</p>
+                        <ul class="list-inline social-buttons animated fadeInUp">
+                            <li><a href="#"><i class="fa fa-twitter"></i></a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+
+                </div>
+            </div>
+
+        </div>
+    </section-->
+	<script src="{% static 'js/wow.js' %}"></script>
+	<script>
+			wow = new WOW(
+			{
+				animateClass: 'animated',
+				offset:       100,
+				callback:     function(box) {
+				console.log("WOW: animating <" + box.tagName.toLowerCase() + ">")
+				}
+			}
+			);
+			wow.init();
+			document.getElementById('moar').onclick = function() {
+				var section = document.createElement('section');
+				section.className = 'section--purple wow fadeInDown';
+				this.parentNode.insertBefore(section, this);
+			};
+    </script>
+    <!-- jQuery -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+  
+    <script src="{% static 'js/jquery.fittext.js' %}"></script>
+	
+    <!-- Contact Form JavaScript -->
+    <script src="{% static 'js/jqBootstrapValidation.js' %}"></script>
+
+
+    <!-- Theme JavaScript -->
+    <script src="{% static 'js/stepform.js' %}"></script>
+    <script src="{% static 'js/agency.min.js' %}"></script>
+	<script src="{% static 'js/freelancer.js' %}"></script>
+    <script src="{% static 'js/imgpreview.js' %}"></script>
+        <!-- Magnific popup -->
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+        <!-- Theme Plugins -->
+    <script src="{% static 'js/theme-plugins.min.js' %}"></script>
+        <!-- Custom Scripts -->
+    <script src="{% static 'js/scripts.min.js' %}"></script>
+    
+    <script>
+        $(window).scroll(function () {
+                    var height = $('body').height();
+                    var scrollTop = $(window).scrollTop();
+
+                      if(scrollTop>475){
+                        $('#applyform').css({ 'position': 'fixed', 'top' : '70px','right' : '148px','width' : '26.5%' });
+                        $('#needform').removeAttr("style",{"margin-top":"-5%","padding-bottom":"3%"}); 
+                        $('#needform').css({"padding-bottom":"3%"});
+                    }
+                      else {
+                         $('#applyform').attr({ 'position': 'relative', 'top' : '0px', 'right' : '0px',});
+
+                         $('#applyform').removeAttr("style",{"width":"20%"});
+                        $('#needform').css({"padding-bottom":"3%"});
+                       }
+                });
+    </script>
+ 
+</body>
+
+</html>
